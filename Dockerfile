@@ -24,6 +24,6 @@ RUN mkdir -p ${HOME} && \
 
 WORKDIR ${HOME}
 
-USER default
+USER 1001
 
 CMD ["/bin/sh"]
