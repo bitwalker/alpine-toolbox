@@ -1,0 +1,4 @@
+#!/bin/sh
+
+nohup go-dnsmasq --default-resolver --append-search-domains --hostsfile=/etc/hosts >dnsmasq.out
+exec "$@"

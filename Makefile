@@ -1,5 +1,6 @@
 .PHONY: help
 
+VERSION ?= `cat VERSION`
 IMAGE_NAME ?= bitwalker/alpine-toolbox
 
 help:
@@ -10,10 +11,11 @@ test: ## Test the Docker image
 	docker run --rm -it $(IMAGE_NAME):latest elixir --version
 
 build: ## Rebuild the Docker image
-	docker build --force-rm -t $(IMAGE_NAME):latest - < ./Dockerfile
+	docker build --force-rm -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):latest .
 
 run: ## Runs the image locally
 	docker run --rm -it --user=root $(IMAGE_NAME):latest sh
 
 release: build ## Rebuild and release the Docker image to Docker Hub
+	docker push $(IMAGE_NAME):$(VERSION)
 	docker push $(IMAGE_NAME):latest
