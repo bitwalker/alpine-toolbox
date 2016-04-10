@@ -1,4 +1,9 @@
 #!/bin/sh
 
-nohup go-dnsmasq --default-resolver --append-search-domains --hostsfile=/etc/hosts >dnsmasq.out
+go-dnsmasq \
+    --default-resolver \
+    --append-search-domains \
+    --hostsfile=/etc/hosts \
+    --listen 127.0.0.1:8053 >&1 2>&2 </dev/null &
+
 exec "$@"
