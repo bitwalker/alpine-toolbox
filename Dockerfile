@@ -6,7 +6,7 @@ MAINTAINER Paul Schoenfelder <paulschoenfelder@gmail.com>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2016-04-9T5:03 \
+ENV REFRESHED_AT=2016-04-11T11:01 \
     LANG=en_US.UTF-8 \
     HOME=/opt/me \
     # Set this so that CTRL+G works properly
@@ -23,16 +23,9 @@ RUN mkdir -p ${HOME} && \
     apk-install \
       curl wget drill tcptraceroute tcpdump ca-certificates \
       elixir vim grep && \
-    wget https://github.com/janeczku/go-dnsmasq/releases/download/${GODNSMASQ_VERSION}/go-dnsmasq-min_linux-amd64 --no-check-certificate --quiet -O /usr/sbin/go-dnsmasq && \
-    chmod 774 /usr/sbin/go-dnsmasq /etc/hosts /etc/resolv.conf && \
     # Other + cleanup
     update-ca-certificates --fresh
 
 WORKDIR ${HOME}
 
-COPY bin /
-
-USER 1001
-
-ENTRYPOINT ["/init"]
 CMD ["/bin/sh"]
