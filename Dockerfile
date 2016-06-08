@@ -18,7 +18,9 @@ RUN mkdir -p ${HOME} && \
     apk --no-cache upgrade && \
     apk-install \
       curl wget drill tcptraceroute tcpdump ca-certificates \
-      elixir vim grep && \
+      elixir vim grep git tar \
+      make automake gcc g++ binutils-gold linux-headers libgcc libstdc++ \
+      python && \
     # Other + cleanup
     update-ca-certificates --fresh
 
